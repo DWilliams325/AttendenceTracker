@@ -5,7 +5,7 @@ import { db } from "./firebase.jsx";
 
 import KidList from './KidList';
 import ActionButtons from './ActionButtons';
-import SignInLogout from './SignInLogout';
+//import SignInLogout from './SignInLogout';
 import AddChildForm from './AddChildForm';
 import GradeLevelSummary from './GradeLevelSummary';
 import CheckedInList from './CheckedInList';
@@ -42,7 +42,6 @@ function App() {
       boxSizing: 'border-box',
       position: 'relative',
     }}>
-      <SignInLogout />
       <KidList kids={kids} />
       <ActionButtons />
       <CheckedInList kids={kids} />
