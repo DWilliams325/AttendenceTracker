@@ -13,9 +13,9 @@ export default function CheckedInList({ kids }) {
       background: '#e8f5e9',
       borderRadius: '8px'
     }}>
-      <h3 style={{ textAlign: 'center', color: '#2e7d32' }}>Checked-In Today</h3>
+      <h3 style={{ textAlign: 'center', color: '#000000' }}>Checked-In Today</h3>
       {checkedInKids.length === 0 ? (
-        <p style={{ textAlign: 'center' }}>No students checked in yet.</p>
+        <p style={{ textAlign: 'center', color: '#000000' }}>No students checked in yet.</p>
       ) : (
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {checkedInKids.map((kid, index) => (

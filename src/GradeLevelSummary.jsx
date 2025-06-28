@@ -27,33 +27,47 @@ function GradeLevelSummary({ kids }) {
   });
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      gap: '2rem',
-      position: 'fixed',
-      bottom: '20px',
-      left: 0,
-      right: 0,
-      textAlign: 'center',
-    }}>
+  <div style={{
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '1rem',
+    flexWrap: 'wrap',
+    position: 'fixed',
+    bottom: '20px',
+    left: 0,
+    right: 0,
+    padding: '0.75rem',
+    backgroundColor: 'transparent', // removes the light background
+    borderTop: 'none',              // removes the line
+  }}>
+
       {Object.entries(counts).map(([label, count]) => (
-        <div key={label}>
-          <strong>{label}</strong>
-          <div
-            style={{
-              backgroundColor: '#f4f4f4',
-              borderRadius: '50%',
-              width: '40px',
-              height: '40px',
-              lineHeight: '40px',
-              marginTop: '0.3rem',
-              fontSize: '1.2rem',
-              fontWeight: 'bold',
-            }}
-          >
-            {count}
+        <div key={label} style={{ textAlign: 'center' }}>
+          <div style={{
+            fontWeight: 'bold',
+            fontSize: '0.85rem',
+            marginBottom: '0.25rem',
+            color: '#0af'          //grade text color
+          }}>
+            {label}
           </div>
+          <div
+  style={{
+    backgroundColor: '#111',       // dark bubble like button
+    color: '#0af',                 // same blue text as button
+    borderRadius: '50%',
+    width: '48px',
+    height: '48px',
+    lineHeight: '48px',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    margin: '0 auto',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+  }}
+>
+  {count}
+</div>
+
         </div>
       ))}
     </div>

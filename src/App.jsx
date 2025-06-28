@@ -15,14 +15,27 @@ function App() {
   const [showPopup, setShowPopup] = useState(false);
 
   // Realtime sync from Firebase
-  useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "kids"), (snapshot) => {
-      const kidData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setKids(kidData);
+useEffect(() => {
+  const unsubscribe = onSnapshot(collection(db, "kids"), (snapshot) => {
+    const kidData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // Sort by last name, then first name
+    kidData.sort((a, b) => {
+      const lastA = a.lastName?.toLowerCase() || '';
+      const lastB = b.lastName?.toLowerCase() || '';
+      const firstA = a.firstName?.toLowerCase() || '';
+      const firstB = b.firstName?.toLowerCase() || '';
+
+      if (lastA !== lastB) return lastA.localeCompare(lastB);
+      return firstA.localeCompare(firstB);
     });
 
-    return () => unsubscribe();
-  }, []);
+    setKids(kidData);
+  });
+
+  return () => unsubscribe();
+}, []);
+
 
   // Add new kid to Firebase
   const addKid = async (newKid) => {
@@ -47,18 +60,22 @@ function App() {
       <CheckedInList kids={kids} />
       <GradeLevelSummary kids={kids} />
 
-      <button 
-        onClick={() => setShowPopup(true)}
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          padding: '10px 20px',
-          fontSize: '1rem'
-        }}
-      >
-        Add Child
-      </button>
+    <button 
+  onClick={() => setShowPopup(true)}
+  style={{
+    margin: '1.5rem auto',
+    padding: '12px 24px',
+    fontSize: '1rem',
+    backgroundColor: '#111',
+    color: '#0af',
+    border: 'none',
+    borderRadius: '8px',
+    width: 'fit-content'
+  }}
+>
+  Add Child
+</button>
+
 
       {showPopup && (
         <AddChildForm 
